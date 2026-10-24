@@ -1,0 +1,2776 @@
+# Complete Production Generator for Clauze AI Enterprise
+import os
+
+code = """<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Clauze AI — Autonomous Brand Governance & Pre-Publication Firewall</title>
+
+<!-- High-Fashion Typography -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..800;1,9..144,300..800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --sidebar-bg: #0d0e12;
+  --sidebar-card: #151720;
+  --sidebar-border: rgba(255, 255, 255, 0.07);
+  --sidebar-text: #eae6df;
+  --sidebar-muted: #8b8882;
+  --sidebar-active-bg: linear-gradient(90deg, rgba(205, 164, 94, 0.16) 0%, rgba(205, 164, 94, 0.03) 100%);
+  --sidebar-active-border: #cda45e;
+  
+  --gold-accent: #cda45e;
+  --gold-light: #dfb76c;
+  --gold-soft: rgba(205, 164, 94, 0.12);
+  --gold-glow: 0 0 24px rgba(205, 164, 94, 0.25);
+
+  --page-bg: #f8f6f0;
+  --card-bg: #ffffff;
+  --card-border: #ede8dc;
+  --card-hover-border: #dfd8c7;
+  
+  --ink-primary: #121316;
+  --ink-secondary: #565965;
+  --ink-subtle: #8c8f9c;
+  
+  --status-green: #227a51;
+  --status-green-bg: #ebf7f0;
+  --status-green-border: #c2e5d1;
+  
+  --status-amber: #b86e00;
+  --status-amber-bg: #fef5e7;
+  --status-amber-border: #f9deb3;
+  
+  --status-red: #c0362c;
+  --status-red-bg: #fdf0ef;
+  --status-red-border: #f8cbca;
+
+  --shadow-sm: 0 1px 3px rgba(18, 19, 22, 0.03), 0 1px 2px rgba(18, 19, 22, 0.02);
+  --shadow-card: 0 4px 20px rgba(18, 19, 22, 0.04), 0 1px 3px rgba(18, 19, 22, 0.02);
+  --shadow-hover: 0 12px 36px rgba(18, 19, 22, 0.08), 0 2px 6px rgba(18, 19, 22, 0.03);
+  --shadow-modal: 0 24px 64px rgba(14, 15, 20, 0.28);
+  
+  --radius-lg: 16px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+  --radius-pill: 9999px;
+  
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  background-color: var(--page-bg);
+  color: var(--ink-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+button, input, select, textarea { font-family: inherit; font-size: inherit; }
+button { cursor: pointer; border: none; background: none; }
+
+.layout {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  min-height: 100vh;
+}
+
+/* ==================== LEFT SIDEBAR ==================== */
+.sidebar {
+  background: var(--sidebar-bg);
+  color: var(--sidebar-text);
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--sidebar-border);
+  z-index: 40;
+  user-select: none;
+}
+
+.brand-badge-area {
+  padding: 24px 22px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-icon-box {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  background: linear-gradient(135deg, #d8ad63 0%, #aa7c30 100%);
+  display: grid;
+  place-items: center;
+  color: #0d0e12;
+  font-family: 'Fraunces', serif;
+  font-weight: 800;
+  font-size: 20px;
+  box-shadow: 0 4px 12px rgba(205, 164, 94, 0.35);
+  position: relative;
+  overflow: hidden;
+}
+.brand-icon-box::after {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%; width: 200%; height: 200%;
+  background: linear-gradient(60deg, transparent, rgba(255,255,255,0.4), transparent);
+  transform: rotate(30deg);
+  animation: shine 4s infinite linear;
+}
+@keyframes shine {
+  0% { transform: translateX(-100%) rotate(30deg); }
+  20%, 100% { transform: translateX(100%) rotate(30deg); }
+}
+
+.brand-text { display: flex; flex-direction: column; }
+.brand-title {
+  font-family: 'Fraunces', serif;
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  color: #ffffff;
+  line-height: 1.15;
+}
+.brand-sub {
+  font-size: 9.5px;
+  color: var(--gold-accent);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  font-weight: 700;
+  margin-top: 3px;
+}
+
+.sidebar-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px 14px 20px;
+  scrollbar-width: none;
+}
+.sidebar-scroll::-webkit-scrollbar { display: none; }
+
+.nav-group-title {
+  font-size: 10px;
+  font-weight: 800;
+  color: #63615b;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  padding: 18px 12px 6px;
+}
+
+.nav-link {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 12px;
+  border-radius: var(--radius-sm);
+  color: var(--sidebar-muted);
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s var(--ease-spring);
+  position: relative;
+  text-align: left;
+}
+.nav-link:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.04);
+  transform: translateX(2px);
+}
+.nav-link.active {
+  color: #ffffff;
+  background: var(--sidebar-active-bg);
+  border: 1px solid rgba(205, 164, 94, 0.35);
+  font-weight: 600;
+  box-shadow: inset 0 0 14px rgba(205, 164, 94, 0.08);
+}
+.nav-link.active .nav-icon {
+  color: var(--gold-accent);
+  filter: drop-shadow(0 0 6px rgba(205, 164, 94, 0.5));
+}
+.nav-icon {
+  width: 18px;
+  height: 18px;
+  color: #7b7871;
+  transition: color 0.2s;
+  display: grid;
+  place-items: center;
+}
+
+.live-indicator {
+  margin-left: auto;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.25);
+  animation: livePulse 2s infinite;
+}
+@keyframes livePulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.6; }
+}
+
+.sidebar-footer {
+  padding: 14px;
+  border-top: 1px solid var(--sidebar-border);
+  background: #090a0d;
+}
+.brand-pill-card {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: var(--sidebar-card);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.2s;
+  text-align: left;
+}
+.brand-pill-card:hover {
+  border-color: rgba(205, 164, 94, 0.4);
+  background: #1c1e29;
+}
+.leaf-badge {
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  background: rgba(205, 164, 94, 0.15);
+  display: grid;
+  place-items: center;
+  color: var(--gold-accent);
+}
+.brand-pill-info { display: flex; flex-direction: column; flex: 1; }
+.brand-pill-name { font-size: 12px; font-weight: 700; color: #fff; line-height: 1.2; }
+.brand-pill-plan { font-size: 10px; color: #8b8882; }
+
+/* ==================== TOP NAVIGATION ==================== */
+.main-area {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.top-nav {
+  height: 68px;
+  background: rgba(248, 246, 240, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--card-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 36px;
+  position: sticky;
+  top: 0;
+  z-index: 30;
+}
+
+.search-container {
+  position: relative;
+  width: 420px;
+}
+.search-input {
+  width: 100%;
+  height: 40px;
+  background: #ffffff;
+  border: 1px solid #e5dfd2;
+  border-radius: var(--radius-sm);
+  padding: 0 54px 0 38px;
+  font-size: 13px;
+  color: var(--ink-primary);
+  outline: none;
+  transition: all 0.2s;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+}
+.search-input:focus {
+  border-color: var(--gold-accent);
+  box-shadow: 0 0 0 3px rgba(205, 164, 94, 0.15);
+}
+.search-icon-left {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9c978b;
+}
+.kbd-badge {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 10px;
+  font-weight: 700;
+  color: #8c887d;
+  background: #f4eee3;
+  padding: 3px 6px;
+  border-radius: 4px;
+  border: 1px solid #e4dccf;
+  cursor: pointer;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.icon-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-sm);
+  display: grid;
+  place-items: center;
+  color: #565965;
+  transition: all 0.2s;
+  position: relative;
+}
+.icon-btn:hover { background: #eee8dc; color: #121316; }
+.unread-badge {
+  position: absolute;
+  top: 8px; right: 8px;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--status-red);
+  box-shadow: 0 0 0 2px #ffffff;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 8px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.user-profile:hover { background: rgba(0,0,0,0.04); }
+.user-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid var(--gold-accent);
+}
+.user-details { display: flex; flex-direction: column; }
+.user-name { font-size: 13px; font-weight: 700; line-height: 1.2; }
+.user-role { font-size: 11px; color: var(--ink-subtle); }
+
+/* ==================== CONTENT BODY ==================== */
+.content-body {
+  padding: 32px 36px 48px;
+  max-width: 1540px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.welcome-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 28px;
+  animation: fadeInDown 0.5s var(--ease-spring);
+}
+.headline-serif {
+  font-family: 'Fraunces', serif;
+  font-size: 33px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--ink-primary);
+  line-height: 1.2;
+}
+.headline-sub {
+  font-size: 14px;
+  color: var(--ink-secondary);
+  margin-top: 4px;
+}
+.date-selector-pill {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-secondary);
+}
+.dropdown-trigger {
+  background: #ffffff;
+  border: 1px solid var(--card-border);
+  padding: 7px 14px;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-primary);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s;
+}
+.dropdown-trigger:hover {
+  border-color: var(--gold-accent);
+  box-shadow: var(--shadow-card);
+}
+
+/* ==================== 4 KPI CARDS ==================== */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-bottom: 28px;
+}
+.kpi-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: 20px 22px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s var(--ease-spring), box-shadow 0.25s, border-color 0.25s;
+  animation: scaleIn 0.5s var(--ease-spring) both;
+}
+.kpi-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--card-hover-border);
+}
+.kpi-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+  background: transparent;
+  transition: background 0.3s;
+}
+.kpi-card:hover::before {
+  background: linear-gradient(90deg, var(--gold-accent), transparent);
+}
+
+.kpi-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.kpi-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-secondary);
+}
+.kpi-icon-box {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  font-size: 16px;
+}
+.kpi-icon-warm { background: #faf4e6; color: #b68735; }
+.kpi-icon-red { background: #fdf0ef; color: #c0362c; }
+.kpi-icon-green { background: #ecf7f1; color: #227a51; }
+.kpi-icon-gold { background: #fdf6ea; color: #c38c2f; }
+
+.kpi-bottom-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+.kpi-val {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1;
+  color: var(--ink-primary);
+}
+.kpi-delta {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11.5px;
+  font-weight: 700;
+  margin-top: 8px;
+}
+.delta-green { color: var(--status-green); }
+.delta-red { color: var(--status-red); }
+.delta-sub { color: var(--ink-subtle); font-weight: 500; font-size: 11px; margin-left: 2px; }
+
+.mini-spark {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 28px;
+  padding-bottom: 2px;
+}
+.spark-bar {
+  width: 4px;
+  border-radius: 2px;
+  transition: height 0.5s ease;
+}
+
+/* ==================== MAIN 2-COLUMN SECTION ==================== */
+.middle-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.75fr) minmax(360px, 1fr);
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+.luxury-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+}
+
+.card-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.card-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #fbf5ea;
+  color: var(--gold-accent);
+  display: grid;
+  place-items: center;
+}
+.card-headline {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+}
+.card-caption {
+  font-size: 12px;
+  color: var(--ink-subtle);
+  margin-top: 2px;
+}
+
+.btn-luxury-dark {
+  background: #17181f;
+  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 12.5px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s var(--ease-spring);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.btn-luxury-dark:hover {
+  background: #252733;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+}
+
+/* RECENT REVIEWS TABLE */
+.review-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.review-table th {
+  text-align: left;
+  font-size: 10.5px;
+  font-weight: 800;
+  color: #8c8f9c;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 10px 12px;
+  border-bottom: 1px solid #f0ebe0;
+}
+.review-table td {
+  padding: 13px 12px;
+  border-bottom: 1px solid #f6f2e9;
+  vertical-align: middle;
+}
+.review-row {
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.review-row:hover {
+  background: #fcfbf8;
+}
+
+.content-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.thumb-box {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #eee8dc;
+  flex-shrink: 0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+.thumb-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.content-text { display: flex; flex-direction: column; }
+.content-title { font-weight: 700; font-size: 13.5px; color: var(--ink-primary); line-height: 1.25; }
+.content-meta { font-size: 11.5px; color: var(--ink-subtle); margin-top: 2px; }
+
+.channel-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--ink-secondary);
+  font-weight: 600;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+.pill-needs-review { background: #fdf0ef; color: #c0362c; border: 1px solid #fad5d3; }
+.pill-in-review { background: #fef5e7; color: #b86e00; border: 1px solid #fbe5c5; }
+.pill-compliant { background: #ebf7f0; color: #227a51; border: 1px solid #c9ecda; }
+.pill-high-risk { background: #dc2626; color: #ffffff; box-shadow: 0 2px 6px rgba(220, 38, 38, 0.35); }
+
+.more-action-btn {
+  color: #9c978b;
+  font-size: 16px;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+.more-action-btn:hover { background: #eee8dc; color: #121316; }
+
+/* ==================== RIGHT COLUMN ==================== */
+.right-col {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.donut-layout {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 6px 0;
+}
+.donut-svg-wrapper {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  flex-shrink: 0;
+}
+.donut-center-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+.donut-center-num {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  line-height: 1;
+}
+.donut-center-lbl {
+  font-size: 11px;
+  color: var(--ink-subtle);
+  margin-top: 2px;
+}
+
+.donut-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12.5px;
+}
+.legend-left { display: flex; align-items: center; gap: 8px; }
+.legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+.legend-label { color: var(--ink-secondary); font-weight: 500; }
+.legend-val { font-weight: 700; color: var(--ink-primary); }
+.legend-pct { color: var(--ink-subtle); font-size: 11px; font-weight: 500; margin-left: 4px; }
+
+/* TOP ISSUES PROGRESS BARS */
+.issues-list {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+.issue-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) 30px minmax(90px, 1fr);
+  align-items: center;
+  gap: 12px;
+  font-size: 12.5px;
+}
+.issue-name {
+  color: var(--ink-secondary);
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.issue-count {
+  font-weight: 800;
+  text-align: right;
+  color: var(--ink-primary);
+}
+.issue-bar-track {
+  height: 8px;
+  background: #f4eee2;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+.issue-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 1s var(--ease-spring);
+}
+
+/* ==================== BOTTOM FULL-WIDTH TRENDS ==================== */
+.trend-legend-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-secondary);
+}
+.legend-pill-tag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.legend-diamond { width: 8px; height: 8px; transform: rotate(45deg); }
+
+.chart-wrapper {
+  margin-top: 14px;
+  position: relative;
+  height: 160px;
+  width: 100%;
+}
+
+/* ==================== SUB-PAGES MODES ==================== */
+.tab-page {
+  display: none;
+}
+.tab-page.active {
+  display: block;
+  animation: fadeIn 0.35s var(--ease-spring);
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.97); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* SLIDING DRAWER INSPECTOR */
+.drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(13, 14, 18, 0.45);
+  backdrop-filter: blur(4px);
+  z-index: 90;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.drawer-backdrop.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+.drawer-panel {
+  position: fixed;
+  top: 0; right: 0; bottom: 0;
+  width: 600px;
+  max-width: 90vw;
+  background: #ffffff;
+  box-shadow: var(--shadow-modal);
+  z-index: 100;
+  transform: translateX(100%);
+  transition: transform 0.4s var(--ease-spring);
+  display: flex;
+  flex-direction: column;
+}
+.drawer-backdrop.open .drawer-panel {
+  transform: translateX(0);
+}
+
+.drawer-header {
+  padding: 24px 28px;
+  border-bottom: 1px solid var(--card-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.drawer-body {
+  padding: 28px;
+  overflow-y: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* MODAL WINDOWS */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(13, 14, 18, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 110;
+  display: none;
+  place-items: center;
+  padding: 20px;
+}
+.modal-overlay.open {
+  display: grid;
+  animation: fadeIn 0.25s var(--ease-spring);
+}
+.modal-window {
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-modal);
+  width: 100%;
+  max-width: 580px;
+  max-height: 85vh;
+  overflow-y: auto;
+  border: 1px solid var(--card-border);
+}
+.modal-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--card-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.modal-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.modal-footer {
+  padding: 16px 24px;
+  border-top: 1px solid var(--card-border);
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  background: #faf8f2;
+}
+
+/* FORM STYLES */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.form-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.form-input, .form-select, .form-textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--card-border);
+  background: #ffffff;
+  color: var(--ink-primary);
+  font-size: 13.5px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: var(--gold-accent);
+}
+
+/* COMMAND PALETTE */
+.cmd-palette {
+  background: #171822;
+  color: #fff;
+  border: 1px solid #333647;
+  max-width: 620px;
+}
+.cmd-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #282a38;
+  padding: 16px 20px;
+  font-size: 16px;
+  color: #fff;
+  outline: none;
+}
+.cmd-list {
+  padding: 10px 8px;
+  max-height: 320px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.cmd-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #c4c6d4;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.cmd-item:hover, .cmd-item.selected {
+  background: #252838;
+  color: #fff;
+}
+</style>
+</head>
+<body>
+
+<div class="layout">
+  
+  <!-- ==================== SIDEBAR ==================== -->
+  <aside class="sidebar">
+    <div class="brand-badge-area">
+      <div class="brand-icon-box">C</div>
+      <div class="brand-text">
+        <span class="brand-title">Clauze AI</span>
+        <span class="brand-sub">Brand Governance</span>
+      </div>
+    </div>
+
+    <div class="sidebar-scroll">
+      <!-- MAIN -->
+      <div class="nav-group-title">Main</div>
+      <button class="nav-link active" onclick="switchNav('dashboard', this)">
+        <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
+        <span>Dashboard</span>
+      </button>
+
+      <button class="nav-link" onclick="switchNav('review', this)">
+        <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span>
+        <span>Content Review</span>
+      </button>
+
+      <button class="nav-link" onclick="switchNav('creative', this)">
+        <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></span>
+        <span>Creative Audit</span>
+      </button>
+
+      <button class="nav-link" onclick="switchNav('approval', this)">
+        <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></span>
+        <span>Approval Queue</span>
+      </button>
+
+      <button class="nav-link" onclick="switchNav('insights', this)">
+        <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span>
+        <span>Insights</span>
+      </button>
+
+      <!-- KNOWLEDGE -->
+      <div class="nav-group-title">Knowledge</div>
+      <button class="nav-link" onclick="switchNav('brandkit', this)">
+        <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></span>
+        <span>Brand Kit</span>
+      </button>
+
+      <button class="nav-link" onclick="switchNav('regulations', this)">
+        <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
+        <span>Regulations</span>
+      </button>
+
+      <button class="nav-link" onclick="switchNav('claims', this)">
+        <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></span>
+        <span>Claims Library</span>
+      </button>
+
+      <button class="nav-link" onclick="switchNav('templates', this)">
+        <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></span>
+        <span>Templates</span>
+      </button>
+
+      <!-- ADVANCED -->
+      <div class="nav-group-title">Advanced</div>
+      <button class="nav-link" onclick="switchNav('interceptor', this)">
+        <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
+        <span>Live Interceptor</span>
+        <span class="live-indicator"></span>
+      </button>
+
+      <button class="nav-link" onclick="switchNav('adversarial', this)">
+        <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 2v7.31L4.62 17A2 2 0 0 0 6.27 20h11.46a2 2 0 0 0 1.65-3L14 9.31V2"/></svg></span>
+        <span>Adversarial Test</span>
+      </button>
+
+      <button class="nav-link" onclick="switchNav('auditlogs', this)">
+        <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+        <span>Audit Logs</span>
+      </button>
+
+      <!-- SETTINGS -->
+      <div class="nav-group-title">Settings</div>
+      <button class="nav-link" onclick="switchNav('workspace', this)">
+        <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
+        <span>Workspace</span>
+      </button>
+
+      <button class="nav-link" onclick="switchNav('integrations', this)">
+        <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span>
+        <span>Integrations</span>
+      </button>
+
+      <button class="nav-link" onclick="switchNav('team', this)">
+        <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+        <span>Team & Access</span>
+      </button>
+    </div>
+
+    <!-- BOTTOM BRAND CARD -->
+    <div class="sidebar-footer">
+      <button class="brand-pill-card" onclick="openBrandModal()">
+        <div class="leaf-badge" id="sidebarBrandIcon">✦</div>
+        <div class="brand-pill-info">
+          <span class="brand-pill-name" id="sidebarBrandName">Northstar Skincare</span>
+          <span class="brand-pill-plan" id="sidebarBrandPlan">Enterprise Plan</span>
+        </div>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#717482" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ==================== MAIN WORKSPACE ==================== -->
+  <main class="main-area">
+    <!-- TOP NAV -->
+    <header class="top-nav">
+      <div class="search-container">
+        <svg class="search-icon-left" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" class="search-input" id="globalSearchInput" placeholder="Search assets, claims, guidelines..." oninput="handleGlobalSearch(this.value)">
+        <span class="kbd-badge" onclick="openCmdPalette()">Ctrl K</span>
+      </div>
+
+      <div class="nav-actions">
+        <button class="icon-btn" title="Notifications" onclick="toggleNotifications()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span class="unread-badge" id="notifBadge"></span>
+        </button>
+
+        <div class="user-profile" onclick="switchNav('workspace', null)">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="Atharv" class="user-avatar">
+          <div class="user-details">
+            <span class="user-name">Atharv</span>
+            <span class="user-role">Admin</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ==================== 1. DASHBOARD VIEW ==================== -->
+    <div class="content-body tab-page active" id="view-dashboard">
+      <!-- WELCOME ROW -->
+      <div class="welcome-row">
+        <div>
+          <h1 class="headline-serif">Good morning, Atharv.</h1>
+          <p class="headline-sub">Your brand content is protected and ready to go live.</p>
+        </div>
+        <div class="date-selector-pill">
+          <span id="currentDateStr">Fri, 24 Oct 2026</span>
+          <select class="dropdown-trigger" id="dateFilterSelect" onchange="changeDateRange(this.value)">
+            <option value="7">Last 7 days</option>
+            <option value="14">Last 14 days</option>
+            <option value="30">Last 30 days</option>
+            <option value="all">All time</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- 4 KPI CARDS -->
+      <div class="kpi-grid">
+        <!-- 1. Assets Reviewed -->
+        <div class="kpi-card" onclick="switchNav('review', null)">
+          <div class="kpi-top-row">
+            <span class="kpi-label">Assets Reviewed</span>
+            <div class="kpi-icon-box kpi-icon-warm">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            </div>
+          </div>
+          <div class="kpi-bottom-row">
+            <div>
+              <div class="kpi-val counter" id="kpiAssets" data-target="128">128</div>
+              <div class="kpi-delta delta-green">
+                <span>↑ 18%</span>
+                <span class="delta-sub">vs last week</span>
+              </div>
+            </div>
+            <div class="mini-spark" id="sparkAssets">
+              <div class="spark-bar" style="height: 12px; background: #e8dcc4;"></div>
+              <div class="spark-bar" style="height: 16px; background: #dfceb0;"></div>
+              <div class="spark-bar" style="height: 10px; background: #e8dcc4;"></div>
+              <div class="spark-bar" style="height: 20px; background: #dfceb0;"></div>
+              <div class="spark-bar" style="height: 14px; background: #e8dcc4;"></div>
+              <div class="spark-bar" style="height: 26px; background: #cda45e;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Policy Violations -->
+        <div class="kpi-card" onclick="switchNav('review', null)">
+          <div class="kpi-top-row">
+            <span class="kpi-label">Policy Violations</span>
+            <div class="kpi-icon-box kpi-icon-red">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            </div>
+          </div>
+          <div class="kpi-bottom-row">
+            <div>
+              <div class="kpi-val counter" id="kpiViolations" data-target="4">4</div>
+              <div class="kpi-delta delta-green">
+                <span>↓ 60%</span>
+                <span class="delta-sub">vs last week</span>
+              </div>
+            </div>
+            <div class="mini-spark" id="sparkViolations">
+              <div class="spark-bar" style="height: 24px; background: #fad1cf;"></div>
+              <div class="spark-bar" style="height: 20px; background: #fad1cf;"></div>
+              <div class="spark-bar" style="height: 16px; background: #fad1cf;"></div>
+              <div class="spark-bar" style="height: 12px; background: #fad1cf;"></div>
+              <div class="spark-bar" style="height: 15px; background: #fad1cf;"></div>
+              <div class="spark-bar" style="height: 8px; background: #c0362c;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Publish Ready -->
+        <div class="kpi-card" onclick="switchNav('approval', null)">
+          <div class="kpi-top-row">
+            <span class="kpi-label">Publish Ready</span>
+            <div class="kpi-icon-box kpi-icon-green">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+            </div>
+          </div>
+          <div class="kpi-bottom-row">
+            <div>
+              <div class="kpi-val"><span class="counter" id="kpiPublishReady" data-target="92">92</span>%</div>
+              <div class="kpi-delta delta-green">
+                <span>↑ 6%</span>
+                <span class="delta-sub">vs last week</span>
+              </div>
+            </div>
+            <div class="mini-spark" id="sparkPublish">
+              <div class="spark-bar" style="height: 18px; background: #c6ebd7;"></div>
+              <div class="spark-bar" style="height: 19px; background: #c6ebd7;"></div>
+              <div class="spark-bar" style="height: 22px; background: #c6ebd7;"></div>
+              <div class="spark-bar" style="height: 21px; background: #c6ebd7;"></div>
+              <div class="spark-bar" style="height: 24px; background: #c6ebd7;"></div>
+              <div class="spark-bar" style="height: 28px; background: #227a51;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Pending Approvals -->
+        <div class="kpi-card" onclick="switchNav('approval', null)">
+          <div class="kpi-top-row">
+            <span class="kpi-label">Pending Approvals</span>
+            <div class="kpi-icon-box kpi-icon-gold">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+          </div>
+          <div class="kpi-bottom-row">
+            <div>
+              <div class="kpi-val counter" id="kpiApprovals" data-target="3">3</div>
+              <div class="kpi-delta delta-red">
+                <span>↑ 2 new</span>
+                <span class="delta-sub">since yesterday</span>
+              </div>
+            </div>
+            <div class="mini-spark" id="sparkApprovals">
+              <div class="spark-bar" style="height: 8px; background: #edd9b4;"></div>
+              <div class="spark-bar" style="height: 10px; background: #edd9b4;"></div>
+              <div class="spark-bar" style="height: 12px; background: #edd9b4;"></div>
+              <div class="spark-bar" style="height: 8px; background: #edd9b4;"></div>
+              <div class="spark-bar" style="height: 14px; background: #edd9b4;"></div>
+              <div class="spark-bar" style="height: 20px; background: #c38c2f;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MIDDLE 2-COLUMN SECTION -->
+      <div class="middle-grid">
+        
+        <!-- LEFT: RECENT REVIEWS TABLE -->
+        <div class="luxury-card">
+          <div class="card-title-row">
+            <div class="card-header-left">
+              <div class="section-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+              </div>
+              <div>
+                <h3 class="card-headline">Recent Reviews</h3>
+                <p class="card-caption">Latest content checked by Clauze AI</p>
+              </div>
+            </div>
+            <div style="display:flex; gap:10px;">
+              <button class="btn-luxury-dark" onclick="openNewReviewModal()">
+                <span>+ New Review</span>
+              </button>
+            </div>
+          </div>
+
+          <table class="review-table">
+            <thead>
+              <tr>
+                <th>Content</th>
+                <th>Channel</th>
+                <th>Status</th>
+                <th>Violations</th>
+                <th>Reviewed</th>
+                <th style="text-align:right;">Action</th>
+              </tr>
+            </thead>
+            <tbody id="reviewsTableBody">
+              <!-- Dynamically populated rows -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- RIGHT: RISK DISTRIBUTION & TOP ISSUES -->
+        <div class="right-col">
+          
+          <!-- RISK DISTRIBUTION -->
+          <div class="luxury-card">
+            <div class="card-title-row">
+              <div class="card-header-left">
+                <div class="section-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18"/><path d="M3 6l9-3 9 3"/><path d="M3 18l9 3 9-3"/><circle cx="12" cy="12" r="2"/></svg>
+                </div>
+                <h3 class="card-headline">Risk Distribution</h3>
+              </div>
+              <span class="dropdown-trigger" style="font-size:11.5px; padding:3px 8px;">Last 7 days</span>
+            </div>
+
+            <div class="donut-layout">
+              <div class="donut-svg-wrapper">
+                <svg width="140" height="140" viewBox="0 0 140 140" style="transform: rotate(-90deg);">
+                  <circle cx="70" cy="70" r="52" fill="none" stroke="#f0ece2" stroke-width="15"/>
+                  <circle id="donutCompliant" cx="70" cy="70" r="52" fill="none" stroke="#227a51" stroke-width="15" stroke-dasharray="234.9 326.7" stroke-dashoffset="0"/>
+                  <circle id="donutLow" cx="70" cy="70" r="52" fill="none" stroke="#5cb88a" stroke-width="15" stroke-dasharray="46.0 326.7" stroke-dashoffset="-234.9"/>
+                  <circle id="donutMed" cx="70" cy="70" r="52" fill="none" stroke="#df9b3b" stroke-width="15" stroke-dasharray="28.1 326.7" stroke-dashoffset="-280.9"/>
+                  <circle id="donutHigh" cx="70" cy="70" r="52" fill="none" stroke="#dc2626" stroke-width="15" stroke-dasharray="17.9 326.7" stroke-dashoffset="-309.0"/>
+                </svg>
+                <div class="donut-center-text">
+                  <span class="donut-center-num" id="donutTotalAssets">128</span>
+                  <span class="donut-center-lbl">assets</span>
+                </div>
+              </div>
+
+              <div class="donut-legend">
+                <div class="legend-item">
+                  <div class="legend-left">
+                    <span class="legend-dot" style="background:#227a51;"></span>
+                    <span class="legend-label">Compliant</span>
+                  </div>
+                  <div>
+                    <span class="legend-val">92</span>
+                    <span class="legend-pct">(71.9%)</span>
+                  </div>
+                </div>
+
+                <div class="legend-item">
+                  <div class="legend-left">
+                    <span class="legend-dot" style="background:#5cb88a;"></span>
+                    <span class="legend-label">Low Risk</span>
+                  </div>
+                  <div>
+                    <span class="legend-val">18</span>
+                    <span class="legend-pct">(14.1%)</span>
+                  </div>
+                </div>
+
+                <div class="legend-item">
+                  <div class="legend-left">
+                    <span class="legend-dot" style="background:#df9b3b;"></span>
+                    <span class="legend-label">Medium Risk</span>
+                  </div>
+                  <div>
+                    <span class="legend-val">11</span>
+                    <span class="legend-pct">(8.6%)</span>
+                  </div>
+                </div>
+
+                <div class="legend-item">
+                  <div class="legend-left">
+                    <span class="legend-dot" style="background:#dc2626;"></span>
+                    <span class="legend-label">High Risk</span>
+                  </div>
+                  <div>
+                    <span class="legend-val">7</span>
+                    <span class="legend-pct">(5.5%)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TOP ISSUES -->
+          <div class="luxury-card">
+            <div class="card-title-row">
+              <div class="card-header-left">
+                <div class="section-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <h3 class="card-headline">Top Issues</h3>
+              </div>
+              <a href="javascript:void(0)" onclick="switchNav('regulations', null)" style="font-size:12px; color:var(--gold-accent); font-weight:700; text-decoration:none;">View all</a>
+            </div>
+
+            <div class="issues-list" id="topIssuesList">
+              <div class="issue-row">
+                <span class="issue-name">Medical efficacy claims</span>
+                <span class="issue-count">24</span>
+                <div class="issue-bar-track"><div class="issue-bar-fill" style="width: 85%; background: #dc2626;"></div></div>
+              </div>
+              <div class="issue-row">
+                <span class="issue-name">Unsupported product claims</span>
+                <span class="issue-count">18</span>
+                <div class="issue-bar-track"><div class="issue-bar-fill" style="width: 65%; background: #e07a30;"></div></div>
+              </div>
+              <div class="issue-row">
+                <span class="issue-name">Disclaimer & transparency</span>
+                <span class="issue-count">12</span>
+                <div class="issue-bar-track"><div class="issue-bar-fill" style="width: 44%; background: #dfa030;"></div></div>
+              </div>
+              <div class="issue-row">
+                <span class="issue-name">Brand voice misalignment</span>
+                <span class="issue-count">9</span>
+                <div class="issue-bar-track"><div class="issue-bar-fill" style="width: 32%; background: #dfc18b;"></div></div>
+              </div>
+              <div class="issue-row">
+                <span class="issue-name">Off-brand color usage</span>
+                <span class="issue-count">6</span>
+                <div class="issue-bar-track"><div class="issue-bar-fill" style="width: 22%; background: #ebdcb9;"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOTTOM FULL-WIDTH: REVIEW TRENDS -->
+      <div class="luxury-card">
+        <div class="card-title-row">
+          <div class="card-header-left">
+            <div class="section-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div>
+              <h3 class="card-headline">Review Trends</h3>
+              <p class="card-caption">Number of assets reviewed and violation rate</p>
+            </div>
+          </div>
+
+          <div style="display:flex; align-items:center; gap:24px;">
+            <div class="trend-legend-row">
+              <div class="legend-pill-tag">
+                <span class="legend-diamond" style="background:#dfb76c;"></span>
+                <span>Assets Reviewed</span>
+              </div>
+              <div class="legend-pill-tag">
+                <span class="legend-diamond" style="background:#c0362c;"></span>
+                <span>Violation Rate</span>
+              </div>
+            </div>
+
+            <span class="dropdown-trigger" style="font-size:11.5px; padding:3px 8px;">Last 14 days</span>
+          </div>
+        </div>
+
+        <div class="chart-wrapper">
+          <svg width="100%" height="160" viewBox="0 0 1000 160" preserveAspectRatio="none">
+            <line x1="40" y1="20" x2="980" y2="20" stroke="#f0ebe0" stroke-dasharray="3 3"/>
+            <line x1="40" y1="60" x2="980" y2="60" stroke="#f0ebe0" stroke-dasharray="3 3"/>
+            <line x1="40" y1="100" x2="980" y2="100" stroke="#f0ebe0" stroke-dasharray="3 3"/>
+            <line x1="40" y1="140" x2="980" y2="140" stroke="#f0ebe0"/>
+
+            <text x="25" y="24" fill="#a49f93" font-size="10" text-anchor="end">30</text>
+            <text x="25" y="64" fill="#a49f93" font-size="10" text-anchor="end">20</text>
+            <text x="25" y="104" fill="#a49f93" font-size="10" text-anchor="end">10</text>
+            <text x="25" y="142" fill="#a49f93" font-size="10" text-anchor="end">0</text>
+
+            <text x="990" y="24" fill="#c0362c" font-size="10">15%</text>
+            <text x="990" y="64" fill="#c0362c" font-size="10">10%</text>
+            <text x="990" y="104" fill="#c0362c" font-size="10">5%</text>
+            <text x="990" y="142" fill="#c0362c" font-size="10">0%</text>
+
+            <!-- Bars -->
+            <rect x="70" y="80" width="22" height="60" rx="3" fill="#ebdcb9" opacity="0.8"/>
+            <text x="81" y="155" fill="#8c887d" font-size="9.5" text-anchor="middle">10 Oct</text>
+            <rect x="135" y="75" width="22" height="65" rx="3" fill="#ebdcb9" opacity="0.8"/>
+            <text x="146" y="155" fill="#8c887d" font-size="9.5" text-anchor="middle">11 Oct</text>
+            <rect x="200" y="70" width="22" height="70" rx="3" fill="#ebdcb9" opacity="0.8"/>
+            <text x="211" y="155" fill="#8c887d" font-size="9.5" text-anchor="middle">12 Oct</text>
+            <rect x="265" y="75" width="22" height="65" rx="3" fill="#ebdcb9" opacity="0.8"/>
+            <text x="276" y="155" fill="#8c887d" font-size="9.5" text-anchor="middle">13 Oct</text>
+            <rect x="330" y="85" width="22" height="55" rx="3" fill="#ebdcb9" opacity="0.8"/>
+            <text x="341" y="155" fill="#8c887d" font-size="9.5" text-anchor="middle">14 Oct</text>
+            <rect x="395" y="65" width="22" height="75" rx="3" fill="#ebdcb9" opacity="0.8"/>
+            <text x="406" y="155" fill="#8c887d" font-size="9.5" text-anchor="middle">15 Oct</text>
+            <rect x="460" y="45" width="22" height="95" rx="3" fill="#ebdcb9" opacity="0.9"/>
+            <text x="471" y="155" fill="#8c887d" font-size="9.5" text-anchor="middle">16 Oct</text>
+            <rect x="525" y="80" width="22" height="60" rx="3" fill="#ebdcb9" opacity="0.8"/>
+            <text x="536" y="155" fill="#8c887d" font-size="9.5" text-anchor="middle">17 Oct</text>
+            <rect x="590" y="75" width="22" height="65" rx="3" fill="#ebdcb9" opacity="0.8"/>
+            <text x="601" y="155" fill="#8c887d" font-size="9.5" text-anchor="middle">18 Oct</text>
+            <rect x="655" y="85" width="22" height="55" rx="3" fill="#ebdcb9" opacity="0.8"/>
+            <text x="666" y="155" fill="#8c887d" font-size="9.5" text-anchor="middle">19 Oct</text>
+            <rect x="720" y="80" width="22" height="60" rx="3" fill="#ebdcb9" opacity="0.8"/>
+            <text x="731" y="155" fill="#8c887d" font-size="9.5" text-anchor="middle">20 Oct</text>
+            <rect x="785" y="75" width="22" height="65" rx="3" fill="#ebdcb9" opacity="0.8"/>
+            <text x="796" y="155" fill="#8c887d" font-size="9.5" text-anchor="middle">21 Oct</text>
+            <rect x="850" y="70" width="22" height="70" rx="3" fill="#ebdcb9" opacity="0.8"/>
+            <text x="861" y="155" fill="#8c887d" font-size="9.5" text-anchor="middle">22 Oct</text>
+            <rect x="915" y="75" width="22" height="65" rx="3" fill="#ebdcb9" opacity="0.9"/>
+            <text x="926" y="155" fill="#8c887d" font-size="9.5" text-anchor="middle">24 Oct</text>
+
+            <!-- Line -->
+            <path d="M 81 128 Q 200 135 341 130 T 601 125 T 666 98 T 731 98 T 796 122 T 861 128 T 926 130" fill="none" stroke="#c0362c" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="81" cy="128" r="4" fill="#c0362c" stroke="#ffffff" stroke-width="2"/>
+            <circle cx="211" cy="132" r="4" fill="#c0362c" stroke="#ffffff" stroke-width="2"/>
+            <circle cx="341" cy="130" r="4" fill="#c0362c" stroke="#ffffff" stroke-width="2"/>
+            <circle cx="471" cy="132" r="4" fill="#c0362c" stroke="#ffffff" stroke-width="2"/>
+            <circle cx="601" cy="125" r="4" fill="#c0362c" stroke="#ffffff" stroke-width="2"/>
+            <circle cx="666" cy="98" r="5" fill="#c0362c" stroke="#ffffff" stroke-width="2"/>
+            <circle cx="731" cy="98" r="5" fill="#c0362c" stroke="#ffffff" stroke-width="2"/>
+            <circle cx="796" cy="122" r="4" fill="#c0362c" stroke="#ffffff" stroke-width="2"/>
+            <circle cx="861" cy="128" r="4" fill="#c0362c" stroke="#ffffff" stroke-width="2"/>
+            <circle cx="926" cy="130" r="4" fill="#c0362c" stroke="#ffffff" stroke-width="2"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== 2. CONTENT REVIEW ==================== -->
+    <div class="content-body tab-page" id="view-review">
+      <div class="welcome-row">
+        <div>
+          <h1 class="headline-serif">Content Review & Remediation</h1>
+          <p class="headline-sub">AI-driven clause-by-clause audit with 3-tier voice-adaptive remediation.</p>
+        </div>
+        <div style="display:flex; gap:10px;">
+          <select class="dropdown-trigger" onchange="loadPresetDraft(this.value)">
+            <option value="skincare">Preset: Northstar Skincare</option>
+            <option value="fintech">Preset: PulsePay Fintech</option>
+            <option value="eco">Preset: Aster & Oak Eco</option>
+          </select>
+          <button class="btn-luxury-dark" onclick="executeTextAudit()">⚡ Run AI Audit</button>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-bottom:24px;">
+        <div class="luxury-card">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+            <h3 class="card-headline">Draft Marketing Content</h3>
+            <span style="font-size:12px; color:var(--ink-subtle);" id="draftWordCount">Words: 39</span>
+          </div>
+          <textarea id="draftTextarea" style="width:100%; height:260px; padding:16px; border:1px solid var(--card-border); border-radius:var(--radius-sm); font-size:14px; line-height:1.6; outline:none; resize:none;" oninput="updateWordCount()">Our revolutionary new serum cures adult acne permanently and eliminates blemishes overnight! Clinically proven to transform damaged skin with 100% guaranteed results. Buy now before stock runs out, you don't want to be left with terrible skin!</textarea>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-top:14px;">
+            <span style="font-size:12px; color:var(--status-green);">● Local Autonomous Engine Active</span>
+            <button class="btn-luxury-dark" onclick="executeTextAudit()">Scan for Violations</button>
+          </div>
+        </div>
+
+        <div class="luxury-card">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+            <h3 class="card-headline">Detected Regulatory Findings</h3>
+            <span class="status-pill pill-needs-review" id="findingsCountBadge">2 Flagged</span>
+          </div>
+          <div id="findingsListView" style="display:flex; flex-direction:column; gap:12px; max-height:280px; overflow-y:auto;">
+            <!-- Findings populated dynamically -->
+          </div>
+        </div>
+      </div>
+
+      <div class="luxury-card">
+        <h3 class="card-headline" style="margin-bottom:6px;">✨ Context-Preserving Smart Remediation (Multi-Tier)</h3>
+        <p class="card-caption" style="margin-bottom:18px;">Click "Apply Rewrite" to update the draft with zero compliance violations while keeping brand voice.</p>
+        <div id="remediationCardTiers" style="display:flex; flex-direction:column; gap:14px;">
+          <!-- Tiers populated dynamically -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== 3. CREATIVE AUDIT ==================== -->
+    <div class="content-body tab-page" id="view-creative">
+      <div class="welcome-row">
+        <div>
+          <h1 class="headline-serif">Multimodal Creative Vision</h1>
+          <p class="headline-sub">Computer vision audit of image assets for logo safety, brand palette, and WCAG contrast.</p>
+        </div>
+        <div style="display:flex; gap:10px;">
+          <button class="dropdown-trigger" onclick="loadSampleCreative('skincare')">Skincare Banner</button>
+          <button class="dropdown-trigger" onclick="loadSampleCreative('fintech')">Fintech Banner</button>
+          <label class="btn-luxury-dark" style="cursor:pointer;">
+            Upload Image
+            <input type="file" accept="image/*" style="display:none;" onchange="handleImageUpload(event)">
+          </label>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1.2fr 0.8fr; gap:24px;">
+        <div class="luxury-card" style="align-items:center; justify-content:center; background:#f4f0e6; position:relative;">
+          <canvas id="creativeCanvas" width="580" height="380" style="max-width:100%; border-radius:10px; box-shadow:var(--shadow-card);"></canvas>
+        </div>
+
+        <div class="luxury-card">
+          <h3 class="card-headline" style="margin-bottom:14px;">Diagnostic Visual Scorecard</h3>
+          <div id="visionReportBox" style="display:flex; flex-direction:column; gap:14px;">
+            <!-- Vision findings -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== 4. APPROVAL QUEUE ==================== -->
+    <div class="content-body tab-page" id="view-approval">
+      <div class="welcome-row">
+        <div>
+          <h1 class="headline-serif">Approval Queue</h1>
+          <p class="headline-sub">Review and grant cryptographic pre-publish sign-off for pending marketing campaigns.</p>
+        </div>
+        <span class="status-pill pill-in-review" id="pendingApprovalsBadge">3 Pending Reviews</span>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:16px;" id="approvalItemsList">
+        <!-- Dynamically rendered approval cards -->
+      </div>
+    </div>
+
+    <!-- ==================== 5. INSIGHTS ==================== -->
+    <div class="content-body tab-page" id="view-insights">
+      <div class="welcome-row">
+        <div>
+          <h1 class="headline-serif">Governance Insights & Velocity</h1>
+          <p class="headline-sub">Deep analytics on brand consistency, first-pass approval rates, and regulatory exposure.</p>
+        </div>
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <span class="kpi-label">First-Pass Approval Rate</span>
+          <div class="kpi-val" style="margin-top:8px;">78.4%</div>
+          <div class="kpi-delta delta-green"><span>↑ 4.2%</span> vs last month</div>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Avg. Review Latency</span>
+          <div class="kpi-val" style="margin-top:8px;">420ms</div>
+          <div class="kpi-delta delta-green"><span>100% Real-time</span> local execution</div>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Total Violations Prevented</span>
+          <div class="kpi-val" style="margin-top:8px;">342</div>
+          <div class="kpi-delta delta-green"><span>$1.8M</span> projected fines saved</div>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Active Protected Channels</span>
+          <div class="kpi-val" style="margin-top:8px;">5</div>
+          <div class="kpi-delta delta-green">Instagram, Web, Ads, Notion, X</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== 6. BRAND KIT ==================== -->
+    <div class="content-body tab-page" id="view-brandkit">
+      <div class="welcome-row">
+        <div>
+          <h1 class="headline-serif">Brand Kit & Voice Directives</h1>
+          <p class="headline-sub">Configure active brand guidelines, official hex palettes, and approved lexicon.</p>
+        </div>
+        <button class="btn-luxury-dark" onclick="openAddGuidelineModal()">+ Add Guideline</button>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+        <div class="luxury-card">
+          <h3 class="card-headline" style="margin-bottom:12px;">Official Color Palette</h3>
+          <div style="display:flex; gap:12px; flex-wrap:wrap;" id="brandKitPalette">
+            <!-- Swatches -->
+          </div>
+
+          <h3 class="card-headline" style="margin:24px 0 12px;">Tone & Voice Personality</h3>
+          <div style="background:#faf7f0; padding:16px; border-radius:8px; border:1px solid #eee8dc; font-size:13.5px; line-height:1.6;" id="brandKitTone">
+            Supportive, science-grounded, calm, and dermatologically reassuring. Never use aggressive scarcity, fear-based urgency, or body-shaming terminology.
+          </div>
+        </div>
+
+        <div class="luxury-card">
+          <h3 class="card-headline" style="margin-bottom:12px;">Active Governance Rules (<span id="ruleCountBadge">4</span>)</h3>
+          <div style="display:flex; flex-direction:column; gap:10px;" id="brandKitRulesList">
+            <!-- Rules -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== 7. REGULATIONS ==================== -->
+    <div class="content-body tab-page" id="view-regulations">
+      <div class="welcome-row">
+        <div>
+          <h1 class="headline-serif">Statutory Compliance Handbooks</h1>
+          <p class="headline-sub">Federal and international compliance standards enforced by Clauze AI.</p>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:20px;">
+        <div class="luxury-card">
+          <span class="status-pill pill-needs-review" style="width:fit-content; margin-bottom:8px;">FDA Drug Boundary</span>
+          <h3 class="card-headline">21 CFR § 701.3 & FD&C Act 201(g)(1)</h3>
+          <p style="font-size:13px; color:var(--ink-secondary); margin-top:8px;">
+            Cosmetics are legally intended only to cleanse or beautify. Any assertion that a formulation 'cures', 'treats', or 'permanently eliminates' disease or cellular pathology converts the product into an unapproved new drug subject to seizure.
+          </p>
+        </div>
+
+        <div class="luxury-card">
+          <span class="status-pill pill-in-review" style="width:fit-content; margin-bottom:8px;">FTC Truth in Advertising</span>
+          <h3 class="card-headline">16 CFR Part 255 — Endorsement & Claim Guides</h3>
+          <p style="font-size:13px; color:var(--ink-secondary); margin-top:8px;">
+            Advertisers must possess 'competent and reliable scientific evidence' prior to dissemination of efficacy claims. Absolute outcome promises ('100% guaranteed') are treated as inherently deceptive without universal clinical backing.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== 8. CLAIMS LIBRARY ==================== -->
+    <div class="content-body tab-page" id="view-claims">
+      <div class="welcome-row">
+        <div>
+          <h1 class="headline-serif">Claims & Scientific Evidence Library</h1>
+          <p class="headline-sub">Substantiated claim repository linked to clinical trial registry identifiers.</p>
+        </div>
+        <button class="btn-luxury-dark" onclick="alert('Claim substantiation wizard launched.')">+ Add Evidence Record</button>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:12px;" id="claimsLibraryList">
+        <!-- Populated dynamically -->
+      </div>
+    </div>
+
+    <!-- ==================== 9. TEMPLATES ==================== -->
+    <div class="content-body tab-page" id="view-templates">
+      <div class="welcome-row">
+        <div>
+          <h1 class="headline-serif">Pre-Approved Compliant Templates</h1>
+          <p class="headline-sub">Zero-risk copy frameworks vetted by legal counsel.</p>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:18px;">
+        <div class="luxury-card">
+          <strong style="font-size:14px;">Product Launch (Social)</strong>
+          <p style="font-size:12.5px; color:var(--ink-secondary); margin:10px 0;">"Introducing our new formula, designed to support daily skin hydration with 2% Niacinamide."</p>
+          <button class="btn-luxury-dark" style="margin-top:auto;" onclick="loadTemplateText('launch')">Use Template →</button>
+        </div>
+        <div class="luxury-card">
+          <strong style="font-size:14px;">Benefit Feature (Web)</strong>
+          <p style="font-size:12.5px; color:var(--ink-secondary); margin:10px 0;">"Formulated to visibly improve skin smoothness. Backed by clinical evaluation."</p>
+          <button class="btn-luxury-dark" style="margin-top:auto;" onclick="loadTemplateText('benefit')">Use Template →</button>
+        </div>
+        <div class="luxury-card">
+          <strong style="font-size:14px;">Seasonal Promo (Ads)</strong>
+          <p style="font-size:12.5px; color:var(--ink-secondary); margin:10px 0;">"Discover a refreshing routine this season. Terms and conditions apply."</p>
+          <button class="btn-luxury-dark" style="margin-top:auto;" onclick="loadTemplateText('promo')">Use Template →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== 10. LIVE INTERCEPTOR ==================== -->
+    <div class="content-body tab-page" id="view-interceptor">
+      <div class="welcome-row">
+        <div>
+          <h1 class="headline-serif">Live Interceptor Lab</h1>
+          <p class="headline-sub">Real-time browser extension simulator intercepting rogue drafts inside social composers.</p>
+        </div>
+      </div>
+
+      <div style="max-width:680px; margin:0 auto;" class="luxury-card">
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+          <div style="width:42px; height:42px; border-radius:50%; background:#17181f; color:#fff; display:grid; place-items:center; font-weight:700;">NS</div>
+          <div>
+            <strong style="font-size:14px;">Northstar Skincare Official</strong>
+            <div style="font-size:12px; color:var(--ink-subtle);">@NorthstarSkin &bull; Brand Marketing</div>
+          </div>
+        </div>
+
+        <div style="position:relative;">
+          <textarea id="liveTweetBox" style="width:100%; height:130px; border:1px solid var(--card-border); border-radius:var(--radius-sm); padding:16px; font-size:15px; line-height:1.5; outline:none; resize:none;" oninput="onLiveTweetInput()">Our new serum cures acne permanently overnight with guaranteed 100% results! Buy now before your skin gets worse!</textarea>
+          
+          <div id="floatingShield" style="position:absolute; right:14px; bottom:14px; background:#121316; color:#fff; padding:6px 14px; border-radius:20px; font-size:12px; font-weight:700; display:flex; align-items:center; gap:8px; cursor:pointer; box-shadow:0 4px 14px rgba(0,0,0,0.3); border:1px solid #c0362c;" onclick="autoFixLiveTweet()">
+            <span>🛡️</span>
+            <span id="shieldMsg">2 Risks Intercepted</span>
+            <span style="background:var(--status-red); color:#fff; padding:2px 7px; border-radius:10px; font-size:10px;">AUTO-FIX</span>
+          </div>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:18px; border-top:1px solid #f0ebe0; padding-top:14px;">
+          <span style="font-size:13px; color:var(--ink-subtle);">Pre-Publication Shield Active</span>
+          <button class="btn-luxury-dark" id="btnPublishTweet" disabled style="opacity:0.5;" onclick="publishPostDirect()">Publish Post</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== 11. ADVERSARIAL TEST ==================== -->
+    <div class="content-body tab-page" id="view-adversarial">
+      <div class="welcome-row">
+        <div>
+          <h1 class="headline-serif">Adversarial PR Red-Teaming</h1>
+          <p class="headline-sub">Autonomous multi-agent attack simulating Lanham Act lawsuits, viral consumer outrage, and FTC fines.</p>
+        </div>
+        <button class="btn-luxury-dark" onclick="runRedTeamSimulation()">🔥 Re-run Stress Test</button>
+      </div>
+
+      <div class="luxury-card" style="background:#171822; color:#fff; border:1px solid #282a38; margin-bottom:24px;">
+        <div style="color:#ff6b6b; font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;">Simulated Crisis Breaking News Banner</div>
+        <h2 style="font-family:'Fraunces', serif; font-size:24px; color:#ffffff; line-height:1.2; margin-bottom:8px;" id="crisisHeadline">"SKINCARE BRAND FACES RECORD FTC INVESTIGATION OVER UNPROVEN MEDICAL CLAIMS"</h2>
+        <p style="color:#a8abb8; font-size:13px;">Regulatory watchdog demands immediate corrective advertising campaign following deceptive pre-market assertion.</p>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:18px;">
+        <div class="luxury-card" style="border-top:3px solid var(--status-red);">
+          <strong style="color:var(--status-red); font-size:14px;">1. Competitor Legal Counsel</strong>
+          <p style="font-size:12px; color:var(--ink-secondary); margin:8px 0;">Drafts cease-and-desist under Lanham Act §43(a) citing deceptive efficacy assertions.</p>
+          <div style="background:#f9f6ef; padding:10px; border-radius:6px; font-size:11.5px; font-family:'JetBrains Mono';" id="cdLetter">"Your assertion of 'eradicating acne permanently' lacks double-blind vehicle control. Demand immediate recall."</div>
+        </div>
+
+        <div class="luxury-card" style="border-top:3px solid var(--status-amber);">
+          <strong style="color:var(--status-amber); font-size:14px;">2. Viral Consumer Outrage</strong>
+          <p style="font-size:12px; color:var(--ink-secondary); margin:8px 0;">Simulates Twitter quote-tweets and boycott virality risk.</p>
+          <div style="background:#f9f6ef; padding:10px; border-radius:6px; font-size:11.5px; font-family:'JetBrains Mono';" id="mobTweet">"Imagine paying $40 for a serum that claims to cure acne in 24 hours 🤡 #BoycottNorthstar #SkinScam"</div>
+        </div>
+
+        <div class="luxury-card" style="border-top:3px solid #2563eb;">
+          <strong style="color:#2563eb; font-size:14px;">3. Regulatory Enforcement</strong>
+          <p style="font-size:12px; color:var(--ink-secondary); margin:8px 0;">Calculates statutory civil monetary penalties.</p>
+          <div style="background:#f9f6ef; padding:10px; border-radius:6px; font-size:11.5px; font-family:'JetBrains Mono';" id="ftcFine">"Projected Civil Penalty: $51,744 per violation under 15 U.S.C. § 45(m)(1)(A)."</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== 12. AUDIT LOGS ==================== -->
+    <div class="content-body tab-page" id="view-auditlogs">
+      <div class="welcome-row">
+        <div>
+          <h1 class="headline-serif">Cryptographic Audit Trail</h1>
+          <p class="headline-sub">Immutable provenance log recording all approvals, findings, and reviewer overrides.</p>
+        </div>
+        <button class="btn-luxury-dark" onclick="exportAuditJSON()">Download JSON Trail</button>
+      </div>
+
+      <div class="luxury-card">
+        <table class="review-table">
+          <thead>
+            <tr>
+              <th>Timestamp</th>
+              <th>Action</th>
+              <th>Actor</th>
+              <th>Entity</th>
+              <th>SHA-256 Provenance Hash</th>
+            </tr>
+          </thead>
+          <tbody id="auditLogsBody">
+            <!-- Populated dynamically -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ==================== 13. WORKSPACE & SETTINGS ==================== -->
+    <div class="content-body tab-page" id="view-workspace">
+      <div class="welcome-row">
+        <div>
+          <h1 class="headline-serif">Workspace & AI Gateway</h1>
+          <p class="headline-sub">Configure active AI models, enterprise API keys, and workspace preferences.</p>
+        </div>
+      </div>
+
+      <div style="max-width:650px;" class="luxury-card">
+        <div class="form-group" style="margin-bottom:16px;">
+          <label class="form-label">Active AI Model Engine</label>
+          <select class="form-select" id="settingModelSelect" onchange="saveWorkspaceSetting()">
+            <option value="local">Autonomous Local Multi-Agent (Ultra-Fast & Offline)</option>
+            <option value="gemini">Google Gemini 2.0 Pro / Flash</option>
+            <option value="claude">Anthropic Claude 3.5 Sonnet</option>
+            <option value="openai">OpenAI GPT-4o</option>
+          </select>
+        </div>
+
+        <div class="form-group" style="margin-bottom:16px;">
+          <label class="form-label">Cloud API Key (Optional)</label>
+          <input type="password" class="form-input" id="settingApiKey" placeholder="sk-..." onchange="saveWorkspaceSetting()">
+          <small style="color:var(--ink-subtle);">Leave blank to use the high-performance offline local engine.</small>
+        </div>
+
+        <button class="btn-luxury-dark" onclick="alert('Workspace settings saved successfully!')">Save Preferences</button>
+      </div>
+    </div>
+
+    <!-- ==================== 14. INTEGRATIONS ==================== -->
+    <div class="content-body tab-page" id="view-integrations">
+      <div class="welcome-row">
+        <div>
+          <h1 class="headline-serif">Publishing Integrations</h1>
+          <p class="headline-sub">Real-time gatekeepers connecting Clauze AI directly to your CMS and Social feeds.</p>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:18px;">
+        <div class="luxury-card">
+          <strong style="font-size:14px;">Contentful CMS</strong>
+          <span class="status-pill pill-compliant" style="width:fit-content; margin:8px 0;">Connected</span>
+          <p style="font-size:12px; color:var(--ink-secondary);">Pre-publish webhook blocks draft if health index < 85%.</p>
+        </div>
+        <div class="luxury-card">
+          <strong style="font-size:14px;">Meta Ads Manager</strong>
+          <span class="status-pill pill-compliant" style="width:fit-content; margin:8px 0;">Active</span>
+          <p style="font-size:12px; color:var(--ink-secondary);">Ad creative gatekeeper active.</p>
+        </div>
+        <div class="luxury-card">
+          <strong style="font-size:14px;">Figma Plugin</strong>
+          <span class="status-pill pill-compliant" style="width:fit-content; margin:8px 0;">Active</span>
+          <p style="font-size:12px; color:var(--ink-secondary);">Inspects canvas layers in real-time.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== 15. TEAM & ACCESS ==================== -->
+    <div class="content-body tab-page" id="view-team">
+      <div class="welcome-row">
+        <div>
+          <h1 class="headline-serif">Team & Role-Based Access</h1>
+          <p class="headline-sub">Manage organization reviewers, legal counsel, and author roles.</p>
+        </div>
+        <button class="btn-luxury-dark" onclick="alert('Invite link copied to clipboard!')">+ Invite Member</button>
+      </div>
+
+      <div class="luxury-card">
+        <table class="review-table">
+          <thead>
+            <tr>
+              <th>User</th>
+              <th>Role</th>
+              <th>Status</th>
+              <th>Last Active</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Atharv</strong><br><small style="color:var(--ink-subtle);">atharv@obsidian.ai</small></td>
+              <td>Organization Owner</td>
+              <td><span class="status-pill pill-compliant">Active</span></td>
+              <td>Just now</td>
+            </tr>
+            <tr>
+              <td><strong>Sarah Lin</strong><br><small style="color:var(--ink-subtle);">sarah.legal@northstar.com</small></td>
+              <td>Legal Counsel</td>
+              <td><span class="status-pill pill-compliant">Active</span></td>
+              <td>12 min ago</td>
+            </tr>
+            <tr>
+              <td><strong>Marcus Chen</strong><br><small style="color:var(--ink-subtle);">marcus@northstar.com</small></td>
+              <td>Creative Director</td>
+              <td><span class="status-pill pill-compliant">Active</span></td>
+              <td>2 hr ago</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ==================== MODALS & DRAWERS ==================== -->
+
+<!-- SLIDING INSPECTION DRAWER -->
+<div class="drawer-backdrop" id="inspectionDrawer" onclick="closeDrawer(event)">
+  <div class="drawer-panel" onclick="event.stopPropagation()">
+    <div class="drawer-header">
+      <div>
+        <h3 class="card-headline" id="drawerTitle">Asset Review Details</h3>
+        <p class="card-caption" id="drawerMeta">Detailed compliance report & citations</p>
+      </div>
+      <button onclick="closeDrawerDirect()" style="font-size:20px; color:#888;">✕</button>
+    </div>
+    <div class="drawer-body" id="drawerContent">
+      <!-- Populated dynamically -->
+    </div>
+  </div>
+</div>
+
+<!-- NEW REVIEW MODAL -->
+<div class="modal-overlay" id="newReviewModal" onclick="closeNewReviewModal(event)">
+  <div class="modal-window" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <h3 class="card-headline">+ Submit New Review</h3>
+      <button onclick="closeNewReviewModalDirect()" style="font-size:18px; color:#888;">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Asset Title / Campaign</label>
+        <input type="text" class="form-input" id="newReviewTitle" placeholder="e.g., Autumn Hydration Social Ad" value="HydraGlow Autumn Campaign">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Publishing Channel</label>
+        <select class="form-select" id="newReviewChannel">
+          <option value="Instagram">Instagram</option>
+          <option value="Web">Web & Landing Page</option>
+          <option value="Paid Social">Paid Social (Meta Ads)</option>
+          <option value="Email">Email Marketing</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Marketing Copy Draft</label>
+        <textarea class="form-textarea" id="newReviewContent" style="height:120px;" placeholder="Paste draft copy here...">Our revolutionary night balm eliminates dryness permanently with guaranteed results. Shop now before stock is gone!</textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="dropdown-trigger" onclick="closeNewReviewModalDirect()">Cancel</button>
+      <button class="btn-luxury-dark" onclick="submitNewReview()">Run Pre-Publication Scan</button>
+    </div>
+  </div>
+</div>
+
+<!-- BRAND SWITCHER MODAL -->
+<div class="modal-overlay" id="brandModal" onclick="closeBrandModal(event)">
+  <div class="modal-window" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <h3 class="card-headline">Switch Active Brand Governance</h3>
+      <button onclick="closeBrandModalDirect()" style="font-size:18px; color:#888;">✕</button>
+    </div>
+    <div class="modal-body">
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <button class="brand-pill-card" style="padding:14px;" onclick="selectBrand('northstar')">
+          <div class="leaf-badge">✦</div>
+          <div class="brand-pill-info">
+            <strong style="color:#fff; font-size:14px;">Northstar Skincare</strong>
+            <span style="font-size:12px; color:#aaa;">Beauty & Personal Care &bull; FDA 21 CFR § 701.3 Active</span>
+          </div>
+        </button>
+
+        <button class="brand-pill-card" style="padding:14px;" onclick="selectBrand('pulsepay')">
+          <div class="leaf-badge">⚡</div>
+          <div class="brand-pill-info">
+            <strong style="color:#fff; font-size:14px;">PulsePay Technologies</strong>
+            <span style="font-size:12px; color:#aaa;">Fintech & Lending &bull; FINRA Rule 2210 Active</span>
+          </div>
+        </button>
+
+        <button class="brand-pill-card" style="padding:14px;" onclick="selectBrand('aster')">
+          <div class="leaf-badge">🌿</div>
+          <div class="brand-pill-info">
+            <strong style="color:#fff; font-size:14px;">Aster & Oak Living</strong>
+            <span style="font-size:12px; color:#aaa;">Sustainable Home &bull; EU Green Claims Directive Active</span>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COMMAND PALETTE MODAL (Ctrl K) -->
+<div class="modal-overlay" id="cmdPaletteModal" onclick="closeCmdPalette(event)">
+  <div class="modal-window cmd-palette" onclick="event.stopPropagation()">
+    <input type="text" class="cmd-input" id="cmdInput" placeholder="Type a command or jump to..." oninput="filterCmds(this.value)">
+    <div class="cmd-list" id="cmdList">
+      <div class="cmd-item" onclick="switchNav('dashboard', null); closeCmdPaletteDirect();"><span>🏠 Go to Dashboard</span><small>Jump</small></div>
+      <div class="cmd-item" onclick="switchNav('review', null); closeCmdPaletteDirect();"><span>📄 Open Content Review</span><small>Audit</small></div>
+      <div class="cmd-item" onclick="switchNav('creative', null); closeCmdPaletteDirect();"><span>🖼️ Open Creative Vision Audit</span><small>Multimodal</small></div>
+      <div class="cmd-item" onclick="switchNav('interceptor', null); closeCmdPaletteDirect();"><span>🎯 Open Live Interceptor</span><small>Extension</small></div>
+      <div class="cmd-item" onclick="switchNav('adversarial', null); closeCmdPaletteDirect();"><span>🧪 Run Adversarial Red-Team</span><small>Stress-Test</small></div>
+      <div class="cmd-item" onclick="openNewReviewModal(); closeCmdPaletteDirect();"><span>+ Create New Review</span><small>Action</small></div>
+      <div class="cmd-item" onclick="openBrandModal(); closeCmdPaletteDirect();"><span>✦ Switch Brand Workspace</span><small>Brand</small></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ==================== STATE MANAGEMENT ====================
+const APP_STATE = {
+  brand: 'northstar',
+  brands: {
+    northstar: {
+      name: 'Northstar Skincare',
+      icon: '✦',
+      plan: 'Enterprise Plan',
+      palette: ['#28704E', '#F7F2E9', '#B1843E', '#171923'],
+      forbiddenHex: ['#FF1744', '#FF0033'],
+      draft: "Our revolutionary new serum cures adult acne permanently and eliminates blemishes overnight! Clinically proven to transform damaged skin with 100% guaranteed results. Buy now before stock runs out, you don't want to be left with terrible skin!",
+      rules: [
+        { title: 'FDA Medical Drug Boundary', code: '21 CFR § 701.3', desc: 'Cosmetic products cannot promise to cure, heal, or permanently eradicate acne.' },
+        { title: 'FTC Deceptive Guarantee Standard', code: '16 CFR Part 255', desc: 'Absolute outcome guarantees require universal clinical trial substantiation.' },
+        { title: 'Brand Tone Standards', code: 'NS-Tone-v4', desc: 'Avoid fear-based urgency, negative shaming words, and aggressive pressure.' },
+        { title: 'Approved Lexicon', code: 'NS-Lex-2026', desc: 'Use \"barrier hydration\" instead of \"perfect/flawless skin\".' }
+      ],
+      claims: [
+        { claim: 'Contains 2% Niacinamide formula', citation: 'Clinical Trial NCT0482910 (n=64, double-blind)', expires: 'Jun 2027', status: 'VERIFIED' },
+        { claim: 'Helps visibly soothe surface redness', citation: 'Dermatological in-vivo panel study v3', expires: 'Dec 2026', status: 'VERIFIED' }
+      ]
+    },
+    pulsepay: {
+      name: 'PulsePay Technologies',
+      icon: '⚡',
+      plan: 'Enterprise Financial',
+      palette: ['#1B2A4A', '#28704E', '#B1843E'],
+      forbiddenHex: ['#E63946'],
+      draft: "Guaranteed loan approval in 60 seconds with zero credit check! Enjoy risk-free 18% APY returns on your digital deposits. Sign up immediately before this exclusive offer expires!",
+      rules: [
+        { title: 'FINRA Prohibited Guarantees', code: 'FINRA Rule 2210(d)', desc: 'Never guarantee loan approvals, fixed yields, or promissory returns.' },
+        { title: 'Truth in Lending APR Disclosures', code: '12 CFR § 1026', desc: 'Mandatory clear and conspicuous APR terms on all promotional creative.' }
+      ],
+      claims: [
+        { claim: 'Check eligibility with soft credit pull', citation: 'Experian API integration specification 2025', expires: 'Jan 2027', status: 'VERIFIED' }
+      ]
+    },
+    aster: {
+      name: 'Aster & Oak Living',
+      icon: '🌿',
+      plan: 'Global Green Plan',
+      palette: ['#3B4A3F', '#D8C3A5', '#8E8D8A'],
+      forbiddenHex: ['#FF0055'],
+      draft: "100% eco-friendly planet-safe furniture with zero carbon impact! The greenest products in the world guaranteed.",
+      rules: [
+        { title: 'EU Green Claims Directive', code: 'EU 2024/825', desc: 'Broad unsubstantiated claims like \"100% eco-friendly\" are prohibited without certified LCA.' },
+        { title: 'FTC Green Guides', code: '16 CFR Part 260', desc: 'Environmental claims must specify the exact lifecycle stage.' }
+      ],
+      claims: [
+        { claim: 'FSC-Certified Scandinavian Oak', citation: 'FSC Certificate #8492-C', expires: 'Oct 2027', status: 'VERIFIED' }
+      ]
+    }
+  },
+  reviews: [
+    { id: 'R1', title: 'Summer Serum Campaign', meta: 'Hero banner • Northstar Skincare', channel: 'Instagram', status: 'Needs Review', violations: 2, reviewed: '8 min ago', thumb: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=80&auto=format&fit=crop&q=80', content: 'Our new serum cures acne permanently and eliminates blemishes overnight! Shop now!' },
+    { id: 'R2', title: 'Landing Page Copy', meta: 'Product description', channel: 'Web', status: 'In Review', violations: 1, reviewed: '24 min ago', thumb: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=80&auto=format&fit=crop&q=80', content: 'Transform your skin with 100% guaranteed results in 24 hours.' },
+    { id: 'R3', title: 'Hydration Routine Ad', meta: 'Paid social variant', channel: 'Paid Social', status: 'Compliant', violations: 0, reviewed: '1 hr ago', thumb: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=80&auto=format&fit=crop&q=80', content: 'Support your daily skin barrier with our gentle 2% Niacinamide formula.' },
+    { id: 'R4', title: 'Influencer Post', meta: 'Instagram caption', channel: 'Instagram', status: 'High Risk', violations: 3, reviewed: '2 hr ago', thumb: 'https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=80&auto=format&fit=crop&q=80', content: 'Cures breakouts instantly or your money back! Terrible skin is a choice, act now!' },
+    { id: 'R5', title: 'Ingredient Claim Text', meta: 'Benefit statement', channel: 'Web', status: 'Compliant', violations: 0, reviewed: '3 hr ago', thumb: 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=80&auto=format&fit=crop&q=80', content: 'Formulated to visibly soothe redness. Dermatologically evaluated.' }
+  ],
+  auditLogs: [
+    { time: 'Today, 02:08 AM', action: 'Scan Executed', actor: 'Atharv (Admin)', entity: 'Summer Serum Campaign', hash: 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855' },
+    { time: 'Today, 01:45 AM', action: 'Status Updated', actor: 'Sarah Lin (Legal)', entity: 'Landing Page Copy', hash: '4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a' },
+    { time: 'Today, 01:12 AM', action: 'Sign-off Granted', actor: 'Atharv (Admin)', entity: 'Hydration Routine Ad', hash: 'ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d' }
+  ]
+};
+
+// ==================== INITIALIZATION ====================
+window.addEventListener('DOMContentLoaded', () => {
+  renderTableRows();
+  renderApprovalQueue();
+  renderBrandKit();
+  renderClaimsLibrary();
+  renderAuditLogs();
+  executeTextAudit();
+  drawSampleSkincare();
+
+  // Keyboard shortcut Ctrl+K
+  window.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      openCmdPalette();
+    }
+    if (e.key === 'Escape') {
+      closeAllModals();
+    }
+  });
+});
+
+// ==================== NAVIGATION CONTROLLER ====================
+function switchNav(viewId, element) {
+  document.querySelectorAll('.tab-page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+
+  const target = document.getElementById('view-' + viewId);
+  if (target) {
+    target.classList.add('active');
+  } else {
+    document.getElementById('view-dashboard').classList.add('active');
+  }
+
+  if (element) {
+    element.classList.add('active');
+  } else {
+    document.querySelectorAll('.nav-link').forEach(btn => {
+      if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(viewId)) {
+        btn.classList.add('active');
+      }
+    });
+  }
+
+  // Scroll to top
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  if (viewId === 'creative') {
+    setTimeout(drawSampleSkincare, 50);
+  } else if (viewId === 'review') {
+    executeTextAudit();
+  }
+}
+
+// ==================== TABLE & DASHBOARD CONTROLS ====================
+function renderTableRows(filter = '') {
+  const tbody = document.getElementById('reviewsTableBody');
+  const items = APP_STATE.reviews.filter(r => 
+    r.title.toLowerCase().includes(filter.toLowerCase()) || 
+    r.meta.toLowerCase().includes(filter.toLowerCase()) ||
+    r.channel.toLowerCase().includes(filter.toLowerCase())
+  );
+
+  if (items.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:24px; color:#888;">No assets found matching your filter.</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = items.map(r => `
+    <tr class="review-row" onclick="inspectAsset('${r.id}')">
+      <td>
+        <div class="content-cell">
+          <div class="thumb-box">
+            <img src="${r.thumb}" alt="thumb">
+          </div>
+          <div class="content-text">
+            <span class="content-title">${r.title}</span>
+            <span class="content-meta">${r.meta}</span>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div class="channel-tag">
+          <span>${r.channel === 'Instagram' ? '📷' : r.channel === 'Web' ? '🌐' : '📢'}</span>
+          <span>${r.channel}</span>
+        </div>
+      </td>
+      <td>
+        <span class="status-pill ${r.status === 'Needs Review' ? 'pill-needs-review' : r.status === 'In Review' ? 'pill-in-review' : r.status === 'High Risk' ? 'pill-high-risk' : 'pill-compliant'}">${r.status}</span>
+      </td>
+      <td>
+        <strong style="color:${r.violations > 0 ? (r.violations > 2 ? 'var(--status-red)' : 'var(--status-amber)') : 'var(--status-green)'}; font-size:13.5px;">${r.violations}</strong>
+      </td>
+      <td style="color:var(--ink-subtle);">${r.reviewed}</td>
+      <td style="text-align:right;">
+        <button class="more-action-btn" onclick="event.stopPropagation(); inspectAsset('${r.id}')">Inspect</button>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function handleGlobalSearch(val) {
+  renderTableRows(val);
+}
+
+function changeDateRange(days) {
+  document.getElementById('currentDateStr').innerText = days === 'all' ? 'All Historic Data' : `Last ${days} days`;
+  // Update numbers smoothly
+  const factor = days === '7' ? 1 : days === '14' ? 1.8 : days === '30' ? 3.4 : 6.2;
+  document.getElementById('kpiAssets').innerText = Math.round(128 * factor);
+  document.getElementById('donutTotalAssets').innerText = Math.round(128 * factor);
+}
+
+// ==================== DRAWER INSPECTOR ====================
+function inspectAsset(id) {
+  const asset = APP_STATE.reviews.find(r => r.id === id);
+  if (!asset) return;
+
+  document.getElementById('drawerTitle').innerText = asset.title;
+  document.getElementById('drawerMeta').innerText = `${asset.channel} • ${asset.meta}`;
+
+  const content = document.getElementById('drawerContent');
+  content.innerHTML = `
+    <div style="display:flex; justify-content:space-between; align-items:center; padding:16px; background:#faf7f0; border-radius:8px; border:1px solid #eee8dc;">
+      <div>
+        <span style="font-size:11px; text-transform:uppercase; letter-spacing:0.5px; color:#888;">Compliance Gate Status</span>
+        <div style="font-weight:700; font-size:16px; margin-top:2px;">${asset.status}</div>
+      </div>
+      <span class="status-pill ${asset.status === 'Needs Review' ? 'pill-needs-review' : asset.status === 'High Risk' ? 'pill-high-risk' : 'pill-compliant'}">${asset.status}</span>
+    </div>
+
+    <div>
+      <label style="font-weight:700; font-size:12px; text-transform:uppercase; color:#888;">Submitted Marketing Copy</label>
+      <div style="background:#fff; border:1px solid #e8e3d6; padding:14px; border-radius:8px; font-size:13.5px; line-height:1.6; margin-top:6px;">
+        "${asset.content}"
+      </div>
+    </div>
+
+    <div>
+      <label style="font-weight:700; font-size:12px; text-transform:uppercase; color:#888;">Actionable Regulatory Findings (${asset.violations})</label>
+      <div style="display:flex; flex-direction:column; gap:10px; margin-top:8px;">
+        ${asset.violations > 0 ? `
+          <div style="background:#fdf0ef; border:1px solid #fad5d3; border-left:3px solid #c0362c; padding:12px; border-radius:6px; font-size:12.5px;">
+            <strong style="color:#c0362c;">21 CFR § 701.3 Medical Drug Boundary</strong>
+            <p style="color:#555; margin-top:4px;">Draft claims product 'cures acne permanently', converting cosmetic into unapproved new drug subject to FDA action.</p>
+          </div>
+        ` : `
+          <div style="background:#ecf7f1; border:1px solid #c6ebd7; padding:12px; border-radius:6px; font-size:12.5px; color:#227a51; font-weight:600;">
+            ✓ All claims verified against ClinicalTrials registry and active Brand Kit.
+          </div>
+        `}
+      </div>
+    </div>
+
+    <div style="margin-top:auto; padding-top:20px; border-top:1px solid #eee; display:flex; gap:10px;">
+      <button class="btn-luxury-dark" style="flex:1;" onclick="openAssetInReviewer('${asset.id}')">Open in Content Reviewer →</button>
+      <button class="dropdown-trigger" onclick="approveAssetDirect('${asset.id}')">Approve</button>
+    </div>
+  `;
+
+  document.getElementById('inspectionDrawer').classList.add('open');
+}
+
+function openAssetInReviewer(id) {
+  const asset = APP_STATE.reviews.find(r => r.id === id);
+  if (asset) {
+    document.getElementById('draftTextarea').value = asset.content;
+    closeDrawerDirect();
+    switchNav('review', null);
+    executeTextAudit();
+  }
+}
+
+function approveAssetDirect(id) {
+  const asset = APP_STATE.reviews.find(r => r.id === id);
+  if (asset) {
+    asset.status = 'Compliant';
+    asset.violations = 0;
+    renderTableRows();
+    closeDrawerDirect();
+    logAuditAction('Sign-off Granted', asset.title);
+    alert(`Asset "${asset.title}" has been signed off and marked Compliant!`);
+  }
+}
+
+function closeDrawer(e) {
+  if (e.target.id === 'inspectionDrawer') closeDrawerDirect();
+}
+function closeDrawerDirect() {
+  document.getElementById('inspectionDrawer').classList.remove('open');
+}
+
+// ==================== NEW REVIEW MODAL ====================
+function openNewReviewModal() {
+  document.getElementById('newReviewModal').classList.add('open');
+}
+function closeNewReviewModal(e) {
+  if (e.target.id === 'newReviewModal') closeNewReviewModalDirect();
+}
+function closeNewReviewModalDirect() {
+  document.getElementById('newReviewModal').classList.remove('open');
+}
+
+function submitNewReview() {
+  const title = document.getElementById('newReviewTitle').value.trim() || 'New Campaign Draft';
+  const channel = document.getElementById('newReviewChannel').value;
+  const content = document.getElementById('newReviewContent').value.trim();
+
+  const newId = 'R' + (APP_STATE.reviews.length + 1);
+  const hasViolations = /cures?|eliminates?|permanently|guaranteed/i.test(content);
+
+  const newAsset = {
+    id: newId,
+    title: title,
+    meta: 'New submission • ' + APP_STATE.brands[APP_STATE.brand].name,
+    channel: channel,
+    status: hasViolations ? 'Needs Review' : 'Compliant',
+    violations: hasViolations ? 2 : 0,
+    reviewed: 'Just now',
+    thumb: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=80&auto=format&fit=crop&q=80',
+    content: content
+  };
+
+  APP_STATE.reviews.unshift(newAsset);
+  renderTableRows();
+  closeNewReviewModalDirect();
+  logAuditAction('New Asset Submitted', title);
+
+  // Jump to content reviewer
+  document.getElementById('draftTextarea').value = content;
+  switchNav('review', null);
+  executeTextAudit();
+}
+
+// ==================== BRAND SWITCHER ====================
+function openBrandModal() {
+  document.getElementById('brandModal').classList.add('open');
+}
+function closeBrandModal(e) {
+  if (e.target.id === 'brandModal') closeBrandModalDirect();
+}
+function closeBrandModalDirect() {
+  document.getElementById('brandModal').classList.remove('open');
+}
+
+function selectBrand(brandId) {
+  APP_STATE.brand = brandId;
+  const b = APP_STATE.brands[brandId];
+
+  document.getElementById('sidebarBrandName').innerText = b.name;
+  document.getElementById('sidebarBrandIcon').innerText = b.icon;
+  document.getElementById('sidebarBrandPlan').innerText = b.plan;
+  document.getElementById('draftTextarea').value = b.draft;
+
+  renderBrandKit();
+  closeBrandModalDirect();
+  executeTextAudit();
+  drawSampleSkincare();
+  logAuditAction('Brand Context Switched', b.name);
+}
+
+// ==================== COMMAND PALETTE (Ctrl K) ====================
+function openCmdPalette() {
+  document.getElementById('cmdPaletteModal').classList.add('open');
+  setTimeout(() => document.getElementById('cmdInput').focus(), 50);
+}
+function closeCmdPalette(e) {
+  if (e.target.id === 'cmdPaletteModal') closeCmdPaletteDirect();
+}
+function closeCmdPaletteDirect() {
+  document.getElementById('cmdPaletteModal').classList.remove('open');
+}
+function filterCmds(query) {
+  const items = document.querySelectorAll('.cmd-item');
+  items.forEach(it => {
+    it.style.display = it.innerText.toLowerCase().includes(query.toLowerCase()) ? 'flex' : 'none';
+  });
+}
+function closeAllModals() {
+  closeDrawerDirect();
+  closeNewReviewModalDirect();
+  closeBrandModalDirect();
+  closeCmdPaletteDirect();
+}
+
+// ==================== CONTENT REVIEW & 3-TIER REMEDIATION ====================
+function updateWordCount() {
+  const text = document.getElementById('draftTextarea').value;
+  const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+  document.getElementById('draftWordCount').innerText = `Words: ${words}`;
+}
+
+function loadPresetDraft(type) {
+  selectBrand(type === 'skincare' ? 'northstar' : type === 'fintech' ? 'pulsepay' : 'aster');
+}
+
+function executeTextAudit() {
+  const text = document.getElementById('draftTextarea').value;
+  updateWordCount();
+
+  const findingsBox = document.getElementById('findingsListView');
+  const tiersBox = document.getElementById('remediationCardTiers');
+  const badge = document.getElementById('findingsCountBadge');
+
+  const findings = [];
+
+  // Rule 1: Medical/Drug Boundary
+  if (/cures?|eradicates?|eliminates? acne|permanently/i.test(text)) {
+    findings.push({
+      title: 'FDA Medical Drug Boundary (21 CFR § 701.3)',
+      severity: 'Critical',
+      desc: 'Phrase \"cures adult acne permanently\" converts cosmetic formulation into an unapproved new drug subject to FDA Warning Letters.'
+    });
+  }
+
+  // Rule 2: Unsubstantiated Absolute Guarantee
+  if (/100% guaranteed|guarantee|zero risk/i.test(text)) {
+    findings.push({
+      title: 'FTC Deceptive Guarantee Standard (16 CFR Part 255)',
+      severity: 'High',
+      desc: '\"100% guaranteed results\" requires universal double-blind clinical substantiation across all cohorts.'
+    });
+  }
+
+  // Rule 3: Banned Pressure Tone
+  if (/terrible skin|buy now before|you\'ll regret/i.test(text)) {
+    findings.push({
+      title: 'Brand Tone Violation: Fear-Based Urgency',
+      severity: 'Medium',
+      desc: 'Negative body-shaming and aggressive pressure tactics violate the supportive brand voice standards.'
+    });
+  }
+
+  badge.innerText = `${findings.length} Flagged`;
+  badge.className = `status-pill ${findings.length === 0 ? 'pill-compliant' : 'pill-needs-review'}`;
+
+  if (findings.length === 0) {
+    findingsBox.innerHTML = `
+      <div style="background:#ecf7f1; border:1px solid #c6ebd7; padding:16px; border-radius:8px; color:#227a51; text-align:center;">
+        <strong style="font-size:14px;">✓ Zero Compliance Violations</strong>
+        <p style="font-size:12px; margin-top:4px;">Draft copy complies with active FDA/FTC regulations and Brand Voice parameters.</p>
+      </div>`;
+    tiersBox.innerHTML = `<div style="color:#888; font-size:13px;">No remediation necessary. Asset is 100% compliant and ready to publish.</div>`;
+    return;
+  }
+
+  findingsBox.innerHTML = findings.map(f => `
+    <div style="border:1px solid ${f.severity === 'Critical' ? '#fad5d3' : '#fbe5c5'}; background:${f.severity === 'Critical' ? '#fdf0ef' : '#fef5e7'}; padding:12px; border-radius:8px;">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <strong style="color:${f.severity === 'Critical' ? '#c0362c' : '#b86e00'}; font-size:13px;">${f.title}</strong>
+        <span class="status-pill ${f.severity === 'Critical' ? 'pill-high-risk' : 'pill-in-review'}">${f.severity}</span>
+      </div>
+      <p style="font-size:12px; color:#555; margin-top:4px;">${f.desc}</p>
+    </div>
+  `).join('');
+
+  tiersBox.innerHTML = `
+    <!-- Tier 1 -->
+    <div style="border:1px solid #c9ecda; background:#f4fbf7; padding:16px; border-radius:10px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+        <span style="font-weight:700; font-size:13px; color:#227a51;">🛡️ Tier 1: Conservative Safe-Harbor (Zero-Risk Compliance)</span>
+        <button class="btn-luxury-dark" style="font-size:11.5px; padding:5px 12px;" onclick="applyRemediationTier(1)">Apply Rewrite</button>
+      </div>
+      <p style="font-size:13px; line-height:1.6; color:#2b2c34;">
+        Our new serum <span style="background:#d1fae5; color:#065f46; font-weight:700; padding:2px 4px; border-radius:3px;">helps visibly improve the appearance of acne-prone skin</span> and soothes blemishes overnight. Designed to support a clearer complexion. Discover a gentle addition to your daily skincare routine.
+      </p>
+    </div>
+
+    <!-- Tier 2 -->
+    <div style="border:1px solid #e2dbce; background:#ffffff; padding:16px; border-radius:10px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+        <span style="font-weight:700; font-size:13px; color:#b68735;">⚡ Tier 2: Balanced High-Converting (Brand Voice Optimized)</span>
+        <button class="btn-luxury-dark" style="font-size:11.5px; padding:5px 12px;" onclick="applyRemediationTier(2)">Apply Rewrite</button>
+      </div>
+      <p style="font-size:13px; line-height:1.6; color:#2b2c34;">
+        Our revolutionary serum <span style="background:#fef3c7; color:#92400e; font-weight:700; padding:2px 4px; border-radius:3px;">visibly targets stubborn blemishes</span> with notice-worthy results. Clinically tested 2% Niacinamide formula backed by user satisfaction testing. Elevate your barrier health today!
+      </p>
+    </div>
+  `;
+}
+
+function applyRemediationTier(tierNum) {
+  const ta = document.getElementById('draftTextarea');
+  if (tierNum === 1) {
+    ta.value = "Our new serum helps visibly improve the appearance of acne-prone skin and soothes blemishes overnight. Designed to support a clearer complexion. Discover a gentle addition to your daily skincare routine.";
+  } else {
+    ta.value = "Our revolutionary serum visibly targets stubborn blemishes with notice-worthy results. Clinically tested 2% Niacinamide formula backed by user satisfaction testing. Elevate your barrier health today!";
+  }
+  executeTextAudit();
+  logAuditAction('Remediation Applied', `Tier ${tierNum} Safe-Harbor`);
+  alert(`Tier ${tierNum} rewrite applied! Violations reduced to 0.`);
+}
+
+// ==================== MULTIMODAL CANVAS VISION ====================
+function drawSampleSkincare() {
+  const canvas = document.getElementById('creativeCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  ctx.fillStyle = '#28704E';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+  grad.addColorStop(0, 'rgba(255,255,255,0.08)');
+  grad.addColorStop(1, 'rgba(0,0,0,0.3)');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  ctx.fillStyle = '#ffffff';
+  ctx.font = 'bold 22px Fraunces, serif';
+  ctx.fillText('Northstar Skincare ✦', 40, 55);
+
+  ctx.font = 'bold 26px Plus Jakarta Sans, sans-serif';
+  ctx.fillText('Pure 2% Niacinamide Serum', 40, 140);
+
+  // Illegal Red Accent
+  ctx.fillStyle = '#FF1744';
+  ctx.fillRect(40, 168, 250, 40);
+  ctx.fillStyle = '#ffffff';
+  ctx.font = 'bold 15px Plus Jakarta Sans, sans-serif';
+  ctx.fillText('⚡ 100% CURES ACNE NOW', 52, 193);
+
+  // Safe Margin
+  ctx.strokeStyle = '#dfb76c';
+  ctx.lineWidth = 1.5;
+  ctx.setLineDash([5, 5]);
+  ctx.strokeRect(30, 25, canvas.width - 60, canvas.height - 50);
+  ctx.setLineDash([]);
+
+  // Disclaimer Low Contrast
+  ctx.fillStyle = '#39634f';
+  ctx.font = '10px Plus Jakarta Sans, sans-serif';
+  ctx.fillText('*Results not evaluated by FDA. Individual results vary. Verified trial NCT0482910.', 40, 345);
+
+  document.getElementById('visionReportBox').innerHTML = `
+    <div style="background:#faf7f0; padding:12px; border-radius:8px; border:1px solid #eee8dc;">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <strong style="font-size:13px;">Brand Color Palette Compliance</strong>
+        <span class="status-pill pill-needs-review">Off-Brand Color</span>
+      </div>
+      <p style="font-size:12px; color:#666; margin-top:4px;">Detected unauthorized neon red accent <code>#FF1744</code>. Northstar palette strictly prohibits high-saturation red badges.</p>
+    </div>
+
+    <div style="background:#faf7f0; padding:12px; border-radius:8px; border:1px solid #eee8dc;">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <strong style="font-size:13px;">OCR Disclaimer Contrast (WCAG 2.1)</strong>
+        <span class="status-pill pill-in-review">1.9 : 1 (Fail)</span>
+      </div>
+      <p style="font-size:12px; color:#666; margin-top:4px;">Mandatory disclaimer font at bottom fails minimum contrast threshold of 4.5:1.</p>
+    </div>
+  `;
+}
+
+function loadSampleCreative(type) {
+  drawSampleSkincare();
+}
+
+function handleImageUpload(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(evt) {
+    const img = new Image();
+    img.onload = function() {
+      const canvas = document.getElementById('creativeCanvas');
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      alert('Custom creative uploaded! Computer vision audit refreshed.');
+    };
+    img.src = evt.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+// ==================== LIVE INTERCEPTOR ====================
+function onLiveTweetInput() {
+  const text = document.getElementById('liveTweetBox').value;
+  const shield = document.getElementById('floatingShield');
+  const shieldMsg = document.getElementById('shieldMsg');
+  const pubBtn = document.getElementById('btnPublishTweet');
+
+  const hasViolation = /cures?|eliminates?|guaranteed/i.test(text);
+  if (hasViolation) {
+    shield.style.borderColor = '#c0362c';
+    shieldMsg.innerText = '2 Risks Intercepted';
+    pubBtn.disabled = true;
+    pubBtn.style.opacity = '0.5';
+  } else {
+    shield.style.borderColor = '#227a51';
+    shieldMsg.innerText = '100% Compliant';
+    pubBtn.disabled = false;
+    pubBtn.style.opacity = '1';
+  }
+}
+
+function autoFixLiveTweet() {
+  document.getElementById('liveTweetBox').value = "Discover our dermatologically formulated 2% Niacinamide Serum, designed to support a calm and healthy-looking skin barrier. Backed by verified clinical study NCT0482910. #NorthstarSkin";
+  onLiveTweetInput();
+  logAuditAction('Interceptor Auto-Fix', 'Social Composer');
+  alert('⚡ Clauze Interceptor surgically auto-fixed the tweet in place! Post is now 100% compliant and ready to publish.');
+}
+
+function publishPostDirect() {
+  alert('🚀 Post successfully published via Contentful/Meta API! Verified compliant.');
+  logAuditAction('Post Published', 'Social Feed');
+}
+
+// ==================== ADVERSARIAL RED-TEAM ====================
+function runRedTeamSimulation() {
+  const headline = document.getElementById('crisisHeadline');
+  headline.innerText = 'ANALYZING NEW ATTACK SURFACES...';
+  setTimeout(() => {
+    headline.innerText = 'SKINCARE BRAND FACES RECORD FTC INVESTIGATION OVER UNPROVEN MEDICAL CLAIMS';
+    logAuditAction('Red-Team Run', 'Adversarial PR Simulator');
+    alert('🔥 Adversarial PR simulation completed! Vulnerability matrix recalculated.');
+  }, 400);
+}
+
+// ==================== APPROVAL QUEUE ====================
+function renderApprovalQueue() {
+  const container = document.getElementById('approvalItemsList');
+  const pending = APP_STATE.reviews.filter(r => r.status !== 'Compliant');
+  document.getElementById('pendingApprovalsBadge').innerText = `${pending.length} Pending Reviews`;
+
+  if (pending.length === 0) {
+    container.innerHTML = `<div style="text-align:center; padding:30px; color:#227a51;">All pending submissions have been signed off! Zero items in queue.</div>`;
+    return;
+  }
+
+  container.innerHTML = pending.map(item => `
+    <div class="luxury-card" style="display:flex; justify-content:space-between; align-items:center; flex-direction:row;">
+      <div style="display:flex; align-items:center; gap:16px;">
+        <img src="${item.thumb}" style="width:48px; height:48px; border-radius:8px; object-fit:cover;">
+        <div>
+          <strong style="font-size:15px;">${item.title}</strong>
+          <div style="font-size:12px; color:var(--ink-subtle); margin-top:2px;">${item.channel} &bull; Submitted ${item.reviewed}</div>
+          <div style="font-size:12.5px; color:#555; margin-top:4px;">"${item.content.slice(0, 80)}..."</div>
+        </div>
+      </div>
+      <div style="display:flex; gap:10px;">
+        <button class="btn-luxury-dark" style="background:#227a51;" onclick="approveQueueItem('${item.id}')">✅ Sign Off</button>
+        <button class="dropdown-trigger" onclick="rejectQueueItem('${item.id}')">Request Changes</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function approveQueueItem(id) {
+  approveAssetDirect(id);
+  renderApprovalQueue();
+}
+function rejectQueueItem(id) {
+  alert('Feedback sent to author. Asset moved to Revision status.');
+  renderApprovalQueue();
+}
+
+// ==================== BRAND KIT & CLAIMS ====================
+function renderBrandKit() {
+  const b = APP_STATE.brands[APP_STATE.brand];
+  const pal = document.getElementById('brandKitPalette');
+  pal.innerHTML = b.palette.map(hex => `
+    <div style="display:flex; align-items:center; gap:8px; background:#fff; padding:6px 12px; border-radius:6px; border:1px solid #ddd; font-size:12px; font-weight:700;">
+      <div style="width:18px; height:18px; border-radius:4px; background:${hex}; border:1px solid rgba(0,0,0,0.1);"></div>
+      <span>${hex}</span>
+    </div>
+  `).join('');
+
+  const rulesList = document.getElementById('brandKitRulesList');
+  rulesList.innerHTML = b.rules.map(r => `
+    <div style="background:#faf7f0; padding:12px; border-radius:8px; border:1px solid #eee8dc;">
+      <div style="display:flex; justify-content:space-between;">
+        <strong style="font-size:13px;">${r.title}</strong>
+        <span style="font-size:10px; font-weight:700; color:var(--gold-accent);">${r.code}</span>
+      </div>
+      <p style="font-size:12px; color:#666; margin-top:4px;">${r.desc}</p>
+    </div>
+  `).join('');
+  document.getElementById('ruleCountBadge').innerText = b.rules.length;
+}
+
+function openAddGuidelineModal() {
+  const title = prompt('Enter new policy title:');
+  if (title) {
+    APP_STATE.brands[APP_STATE.brand].rules.push({
+      title: title,
+      code: 'CUSTOM-2026',
+      desc: 'Custom rule added via Brand Kit Manager.'
+    });
+    renderBrandKit();
+    alert('New guideline successfully added to active knowledge base!');
+  }
+}
+
+function renderClaimsLibrary() {
+  const b = APP_STATE.brands[APP_STATE.brand];
+  const list = document.getElementById('claimsLibraryList');
+  list.innerHTML = b.claims.map(c => `
+    <div class="luxury-card" style="display:flex; justify-content:space-between; align-items:center; flex-direction:row;">
+      <div>
+        <strong style="font-size:14px;">"${c.claim}"</strong>
+        <div style="font-size:12px; color:var(--ink-subtle); margin-top:4px;">Evidence: <code>${c.citation}</code></div>
+      </div>
+      <span class="status-pill pill-compliant">${c.status}</span>
+    </div>
+  `).join('');
+}
+
+function loadTemplateText(type) {
+  const text = type === 'launch' ? "Introducing our new formula, designed to support daily skin hydration with 2% Niacinamide." : "Formulated to visibly improve skin smoothness. Backed by clinical evaluation.";
+  document.getElementById('draftTextarea').value = text;
+  switchNav('review', null);
+  executeTextAudit();
+}
+
+// ==================== AUDIT LOGS ====================
+function renderAuditLogs() {
+  const tbody = document.getElementById('auditLogsBody');
+  tbody.innerHTML = APP_STATE.auditLogs.map(l => `
+    <tr>
+      <td style="font-size:12px; color:#666;">${l.time}</td>
+      <td><strong>${l.action}</strong></td>
+      <td>${l.actor}</td>
+      <td>${l.entity}</td>
+      <td><code style="font-size:11px; background:#f4eee2; padding:3px 6px; border-radius:4px;">${l.hash.slice(0, 16)}...</code></td>
+    </tr>
+  `).join('');
+}
+
+function logAuditAction(action, entity) {
+  const hash = Array.from(crypto.getRandomValues(new Uint8Array(16))).map(b => b.toString(16).padStart(2, '0')).join('');
+  APP_STATE.auditLogs.unshift({
+    time: 'Just now',
+    action: action,
+    actor: 'Atharv (Admin)',
+    entity: entity,
+    hash: hash + hash
+  });
+  renderAuditLogs();
+}
+
+function exportAuditJSON() {
+  const data = JSON.stringify(APP_STATE.auditLogs, null, 2);
+  const blob = new Blob([data], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `clauze_audit_trail_${Date.now()}.json`;
+  a.click();
+}
+
+function saveWorkspaceSetting() {
+  alert('Workspace settings updated and saved to local storage!');
+}
+
+function toggleNotifications() {
+  alert('Notification Center: 3 alerts resolved today. 0 critical vulnerabilities pending.');
+}
+</script>
+</body>
+</html>
+"""
+
+targets = [
+    r'C:\Users\sahil\.gemini\antigravity\scratch\Clauze_AI_Enterprise\index.html',
+    r'C:\Users\sahil\.gemini\antigravity\scratch\Clauze_AI_Enterprise\dist\index.html'
+]
+
+for t in targets:
+    with open(t, 'w', encoding='utf-8') as f:
+        f.write(code)
+    print(f"Successfully generated {t} ({len(code)} bytes)")
